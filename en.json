@@ -1,0 +1,42 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "greeter",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+            "name": "SongMatchIntent",
+            "slots": [],
+            "samples": [
+                "Play Song Match",
+                "Open Song Match",
+            ]
+        }
+        {
+            "name": "ArtistIntent",
+            "slots": [
+                {
+                    "name": "Musician",
+                    "type": "AMAZON.Musician"
+                }            
+            ],
+            "samples":[
+                "{Musician}"
+            ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
