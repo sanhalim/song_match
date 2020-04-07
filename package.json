@@ -1,0 +1,23 @@
+{
+  "name": "song_match",
+  "version": "1.0.0",
+  "description": "coding challenge for volleythat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanhalim/song_match.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanhalim/song_match/issues"
+  },
+  "homepage": "https://github.com/sanhalim/song_match#readme",
+  "dependencies": {
+    "alexa-app": "^4.2.3"
+  }
+}
