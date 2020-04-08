@@ -24,15 +24,11 @@
             ]
         }
         {
-            "name": "ArtistIntent",
+            "name": "KhalidIntent",
             "slots": [
-                {
-                    "name": "Musician",
-                    "type": "AMAZON.Musician"
-                }            
             ],
             "samples":[
-                "{Musician}"
+                "Khalid"
             ]
         }
       ],
