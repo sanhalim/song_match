@@ -1,10 +1,6 @@
 
 const Alexa = require('ask-sdk-core')
-
 const persistenceAdapter = require('ask-sdk-s3-persistence-adapter');
-// i18n library dependency, we use it below in a localisation interceptor
-const i18n = require('i18next');
-
 
 const LaunchRequestHandler = {
 	canHandle(handlerInput) {
@@ -35,8 +31,9 @@ const ArtistHandler = {
     attributes.counter = 0;
     const artist_string = request.intent.slots.Artist.value;
     var question = questions[artist_string][counter];
-    var repromptSpeech = question
-    var speakText = quizMessage + question;
+    var answerOptions = answers[artist_string][counter][0] + ' or ' + answers[artist_string][counter][1]
+    var repromptSpeech = answerOptions
+    var speakText = quizMessage + question + answerOptions;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -72,12 +69,21 @@ const QuestionAnswerHandler = {
     }
     attributes.counter ++;
 
-    var question = 
+    if (counter < 3) {
+    	const artist_string = request.intent.slots.Artist.value;
+    	var question = questions[artist_string][counter];
+	    var answerOptions = answers[artist_string][counter][0] + ' or ' + answers[artist_string][counter][1];
+	    speakOutput = 'Got it. Next Question, ' + question + answerOptions;
+	    repromptOutput = answerOptions;
+	    return response.speak(speakOutput)
+	    .reprompt(repromptOutput)
+	    .getResponse();
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
-
+    }
+    else {
+    	speakOutput = 'Thank you for playing. Your song is ' + songs[artist_string][attributes.answerVal] + 'Would you like to play with another artist? If so, say the artist name.'
+    	return response.speak(speakOutput).getResponse();
+    }
 	}
 
 }
@@ -191,3 +197,4 @@ var SZASongs = {111:"All the Stars", 112:"The Weekend", 121:'Love Galore', 122:'
 var SwiftSongs = {111:"Red", 112:"Soon you'll get better", 121:'Everything has Changed', 122:'Love Story', 211:'Lover', 212:'Mine', 221:'Dear John', 222:'Mean'};
 var questions = {'khalid':KhalidQuestions, 'bruno mars':BrunoMarsQuestions, 'sza':SZAQuestions, 'taylor swift':TaylorSwiftQuestions};
 var answers = {'khalid':AnswerOptionsKhalid, 'bruno mars':AnswerOptionsBruno, 'sza':AnswerOptionsSZA, 'taylor swift':AnswerOptionsTaylor};
+var songs = {'khalid':KhalidSongs, 'bruno mars':BrunoSongs, 'sza':SZASongs, 'taylor swift':SwiftSongs};
