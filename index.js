@@ -18,53 +18,61 @@ const LaunchRequestHandler = {
 	}
 }
 
-const SongMatchHandler = {
+const ArtistHandler = {
   canHandle(handlerInput) {
   	const request = handlerInput.requestEnvelope.request;
   	console.log('Inside SongMatch');
   	console.log(JSON.stringify(request));
     return request.type === 'IntentRequest'
-      && (request.intent.name === "SongMatchIntent");
+      && (request.intent.name === "ArtistIntent");
   },
   handle(handlerInput) {
+  	const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const response = handlerInput.responseBuilder;
+    const request = handlerInput.requestEnvelope.request;
+
+    attributes.answerVal = 0;
+    attributes.counter = 0;
+    const artist_string = request.intent.slots.Artist.value;
+    var question = questions[artist_string][counter];
+    var repromptSpeech = question
+    var speakText = quizMessage + question;
 
     return handlerInput.responseBuilder
       .speak(speechText)
+      .reprompt(repromptSpeech)
       .getResponse();
   } 
 };
 
-const ArtistHandler = {
+const QuestionAnswerHandler = {
 	canHandle(handlerInput) {
+    console.log("Inside QuizAnswerHandler");
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const request = handlerInput.requestEnvelope.request;
+
     return request.type === 'IntentRequest'
-      && (request.intent.name === "ArtistIntent");
+      && (request.intent.name === "AnswerAIntent" || request.intent.name === "AnswerBIntent");
 
 	},
 	handle(handlerInput) {
+	console.log("Inside QuizAnswerHandler - handle");
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const response = handlerInput.responseBuilder;
+    const request = handlerInput.requestEnvelope.request;
 
-	//which artist?
-	if handlerInput.
+    var speakOutput = ``;
+    var repromptOutput = ``;
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
+    if (request.intent.name === "AnswerAIntent") {
+    	attributes.answerVal += Math.pow(10, attributes.counter) * 1;
+    }
+    else {
+    	attributes.answerVal += Math.pow(10, attributes.counter) * 2;
+    }
+    attributes.counter ++;
 
-	}
-
-}
-
-const QuestionHandler = {
-	canHandle(handlerInput) {
-    return request.type === 'IntentRequest'
-      && (request.intent.name === "ArtistIntent");
-
-	},
-	handle(handlerInput) {
-
-	//keep asking question
-
-	//var song_id = 0
-	//song_id += 10 ^ index of question * (1+index of answer)
+    var question = 
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -168,6 +176,7 @@ exports.handler = Alexa.SkillBuilders.custom()
 
 const welcomeMessage = "Welcome to Song Match. Through a series of questions, we are able to discover which of your favorite artist's songs best match you. Please tell me the name of your favorite artist.";
 const repromptSpeech = 'What is the name of your favorite artist?';
+const quizMessage = 'Great. {Artist}. Now please answer these three questions to help me match you to a {Arist} song.'
 const KhalidQuestions = ['What would you crack open on a warm summer night?', 'How do you deal with negative emotions?', 'Favorite pick-up line?'];
 const BrunoMarsQuestions = ['What is your ideal date night?', 'What is your vibe?', 'Its Saturday Night, where are you going?'];
 const TaylorSwiftQuestions  = ['How do you deal with a break up?', 'Who are you feuding with right now?', 'Favorite cat color?'];
@@ -180,3 +189,5 @@ var BrunoSongs = {111:"Uptown Funk", 112:"Lazy Song", 121:'When I was your man',
 var KhalidSongs = {111:"lovely", 112:"Eastside", 121:'Young, Dumb, and Broke', 122:'American Teen', 211:'Location', 212:'Suncity', 221:'Saturday Nights', 222:'Talk'};
 var SZASongs = {111:"All the Stars", 112:"The Weekend", 121:'Love Galore', 122:'Doves in the Wind', 211:"Broken Clocks", 212:"Go Gina", 221:"Childs Play", 222:"Garden"};
 var SwiftSongs = {111:"Red", 112:"Soon you'll get better", 121:'Everything has Changed', 122:'Love Story', 211:'Lover', 212:'Mine', 221:'Dear John', 222:'Mean'};
+var questions = {'khalid':KhalidQuestions, 'bruno mars':BrunoMarsQuestions, 'sza':SZAQuestions, 'taylor swift':TaylorSwiftQuestions};
+var answers = {'khalid':AnswerOptionsKhalid, 'bruno mars':AnswerOptionsBruno, 'sza':AnswerOptionsSZA, 'taylor swift':AnswerOptionsTaylor};
