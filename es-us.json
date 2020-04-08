@@ -1,0 +1,105 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "tester person",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ArtistIntent",
+                    "slots": [
+                        {
+                            "name": "Artist",
+                            "type": "artists"
+                        }
+                    ],
+                    "samples": [
+                        "She is {Artist}",
+                        "He is {Artist}",
+                        "{Artist}"
+                    ]
+                },
+                {
+                    "name": "AnswerAIntent",
+                    "slots": [],
+                    "samples": [
+                        "My Answer is A",
+                        "A"
+                    ]
+                },
+                {
+                    "name": "AnswerBIntent",
+                    "slots": [],
+                    "samples": [
+                        "My Answer is B",
+                        "B"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "artists",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "bruno"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "khalid"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "swift"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "taylor"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "taylor swift"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sza"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bruno mars"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
