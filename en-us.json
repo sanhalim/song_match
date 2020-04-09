@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "tester person",
+            "invocationName": "song match",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -21,7 +21,9 @@
                 },
                 {
                     "name": "AMAZON.StopIntent",
-                    "samples": []
+                    "samples": [
+                        "No"
+                    ]
                 },
                 {
                     "name": "AMAZON.NavigateHomeIntent",
@@ -56,6 +58,10 @@
                         "My Answer is B",
                         "B"
                     ]
+                },
+                {
+                    "name": "AMAZON.RepeatIntent",
+                    "samples": []
                 }
             ],
             "types": [
@@ -63,38 +69,35 @@
                     "name": "artists",
                     "values": [
                         {
-                            "name": {
-                                "value": "bruno"
-                            }
-                        },
-                        {
+                            "id": "khalid",
                             "name": {
                                 "value": "khalid"
                             }
                         },
                         {
+                            "id": "taylor",
                             "name": {
-                                "value": "swift"
+                                "value": "taylor swift",
+                                "synonyms": [
+                                    "swift",
+                                    "taylor"
+                                ]
                             }
                         },
                         {
-                            "name": {
-                                "value": "taylor"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "taylor swift"
-                            }
-                        },
-                        {
+                            "id": "sza",
                             "name": {
                                 "value": "sza"
                             }
                         },
                         {
+                            "id": "bruno",
                             "name": {
-                                "value": "bruno mars"
+                                "value": "bruno mars",
+                                "synonyms": [
+                                    "mars",
+                                    "bruno"
+                                ]
                             }
                         }
                     ]
